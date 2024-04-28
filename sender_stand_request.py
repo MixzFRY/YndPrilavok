@@ -8,9 +8,6 @@ def post_new_user(body):
     return requests.post(url, json=body, headers=data.headers)
 
 
-response = post_new_user(data.user_body)
-
-
 def auth():
     url = configuration.URL_SERVICE + configuration.CREATE_USER_PATH
     new_data = data.user_body.copy()
@@ -18,20 +15,20 @@ def auth():
     return requests.post(url, json=new_data, headers=data.headers)
 
 
-print(response.status_code)
-print(response.json())
+def get_kit_table():
+    url = configuration.URL_SERVICE + configuration.DOC_PATH
+    return requests.get(url)
+
+
+response = get_kit_table()
 
 
 def post_new_client_kit(kit_create, authToken):
     url = configuration.URL_SERVICE + configuration.CREATE_KIT_PATH
 
     new_headers = data.headers.copy()
-    new_headers['Authorization'] = 'Bearer {authToken}'
+    new_headers['Authorization'] = 'Bearer + authToken'
 
     return requests.post(url, json=kit_create, headers=new_headers)
 
 
-response = post_new_client_kit(data.kit_create, auth)
-
-print(response.status_code)
-print(response.json())
